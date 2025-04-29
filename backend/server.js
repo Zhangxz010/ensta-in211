@@ -5,6 +5,7 @@ import usersRouter from './routes/users.js';
 import { routeNotFoundJsonHandler } from './services/routeNotFoundJsonHandler.js';
 import { jsonErrorHandler } from './services/jsonErrorHandler.js';
 import { appDataSource } from './datasource.js';
+import moviesRouter from './routes/movies.js'; 
 
 const apiRouter = express.Router();
 
@@ -18,6 +19,7 @@ appDataSource
     app.use(cors());
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
+    apiRouter.use('/movies', moviesRouter); 
 
     // Register routes
     apiRouter.get('/', (req, res) => {
@@ -34,9 +36,10 @@ appDataSource
 
     const port = parseInt(process.env.PORT || '8080');
 
-    app.listen(port, () => {
-      console.log(`Server listening at http://localhost:${port}`);
+    app.listen(port, '0.0.0.0', () => {
+      console.log(`Server listening at http://0.0.0.0:${port}`);
     });
+    
   })
   .catch((err) => {
     console.error('Error during Data Source initialization:', err);

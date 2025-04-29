@@ -1,3 +1,26 @@
 .about {
   text-align: center;
+  padding: 2rem;
+}
+
+.about form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.about input {
+  padding: 0.5rem;
+  width: 200px;
+  font-size: 1rem;
+}
+
+.about button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
