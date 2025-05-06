@@ -30,11 +30,19 @@ appDataSource
     // Register API router
     app.use('/api', apiRouter);
 
+    // Register frontend
+    const publicPath = new URL("./public", import.meta.url).pathname;
+    app.use(express.static(publicPath));
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(publicPath, "index.html"));
+    });
+
+
     // Register 404 middleware and error handler
     app.use(routeNotFoundJsonHandler); // this middleware must be registered after all routes to handle 404 correctly
     app.use(jsonErrorHandler); // this error handler must be registered after all middleware to catch all errors
 
-    const port = parseInt(process.env.PORT || '8080');
+    const port = parseInt(process.env.PORT || '8000');
 
     app.listen(port, '0.0.0.0', () => {
       console.log(`Server listening at http://0.0.0.0:${port}`);

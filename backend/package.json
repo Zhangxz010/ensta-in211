@@ -11,7 +11,8 @@
     "postmigration:generate": "./postmigration.sh",
     "migration:run": "dotenv -- typeorm --dataSource='./datasource.js' migration:run",
     "migration:revert": "dotenv -- typeorm --dataSource='./datasource.js' migration:revert",
-    "seed": "cross-env node ./scripts/seed.js"
+    "seed": "cross-env node ./scripts/seed.js",
+    "vercel-build": "npm run migration:run"
   },
   "dependencies": {
     "cors": "^2.8.5",
