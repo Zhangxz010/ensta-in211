@@ -63,3 +63,28 @@
 .App-link {
   color: #61dafb;
 }
+
+.load-more-button {
+  margin: 2rem auto;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: #61dafb;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.load-more-button:hover {
+  background-color: #21a1f1;
+}
+
+.movie-title {
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  margin: 0.5rem 0;
+}
+
+.movie-info {
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  color: #ddd;
+}

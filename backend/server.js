@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import express from 'express';
 import logger from 'morgan';
 import cors from 'cors';
@@ -19,9 +21,11 @@ appDataSource
     app.use(cors());
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
+    // Register routes
+
     apiRouter.use('/movies', moviesRouter); 
 
-    // Register routes
+
     apiRouter.get('/', (req, res) => {
       res.send('Hello from Express!');
     });

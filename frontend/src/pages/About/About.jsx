@@ -10,7 +10,7 @@ function About() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("/api/movies/new", {
+    const response = await fetch("http://localhost:8000/api/movies/new", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,6 +18,7 @@ function About() {
       body: JSON.stringify({ title, year }),
     });
 
+    console.log('response', response)
 
     if (response.ok) {
       setMessage("Film ajouté !");

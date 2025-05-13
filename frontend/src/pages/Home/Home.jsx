@@ -1,4 +1,3 @@
-// Home.jsx
 import { useState } from 'react';
 import { useFetchMovies } from "./useFetchMovies";
 import Movie from "./Movie";
@@ -7,7 +6,7 @@ import './Home.css';
 
 function Home() {
   const [movieName, setMovieName] = useState("");
-  const movies = useFetchMovies();
+  const { movies, loadMore, hasMore } = useFetchMovies();
 
   const handleInputChange = (e) => {
     setMovieName(e.target.value);
@@ -42,9 +41,17 @@ function Home() {
             ))
           )}
         </div>
+
+        {hasMore && (
+          <button className="load-more-button" onClick={loadMore}>
+            Charger plus de films
+          </button>
+        )}
       </header>
     </div>
   );
 }
 
 export default Home;
+
+

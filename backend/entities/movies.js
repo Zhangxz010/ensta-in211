@@ -14,6 +14,10 @@ const Movie = new typeorm.EntitySchema({
     year: {
       type: 'int',
     },
+    likes: {
+      type: 'int',
+      default: 0,
+    }
   },
 });
 
