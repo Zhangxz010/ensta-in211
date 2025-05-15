@@ -20,15 +20,52 @@ router.post('/new', async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
-    try {
-      const movies = await movieRepository.find(); 
-      res.json(movies);
-    } catch (err) {
-      console.error('Erreur lors de la récupération des films:', err);
-      res.status(500).json({ error: 'Erreur serveur' });
+router.post('/:id/like', async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const movie = await movieRepository.findOneBy({ id });
+    if (!movie) {
+      return res.status(404).json({ error: "Film non trouvé" });
     }
-  });
+
+    movie.likes += 1;
+    await movieRepository.save(movie);
+
+    res.status(200).json({ message: "Like ajouté", likes: movie.likes });
+  } catch (err) {
+    console.error("Erreur lors de l'ajout du like :", err);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+router.get('/', async (req, res) => {
+  try {
+    const sortBy = req.query.sort || 'likes';
+    const order = req.query.order === 'asc' ? 'ASC' : 'DESC';
+
+    const page = parseInt(req.query.page || "1");
+    const limit = 20; 
+    const skip = (page - 1) * limit;
+
+    const movies = await movieRepository.find({
+      order: { [sortBy]: order },
+      skip: skip,
+      take: limit,
+    });
+
+    res.json(movies);
+  } catch (err) {
+    console.error('Erreur lors de la récupération des films:', err);
+    res.status(500).json({ error: 'Erreur serveur' });
+  }
+});
+
+router.get('/likes', async (req, res) => {
+  const movies = await movieRepository.find({ select: ["tmdb_id", "likes"] });
+  res.json(movies);
+});
+
 
   router.delete('/:id', async (req, res) => {
     try {

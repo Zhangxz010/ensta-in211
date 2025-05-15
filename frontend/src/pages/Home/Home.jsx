@@ -6,7 +6,10 @@ import './Home.css';
 
 function Home() {
   const [movieName, setMovieName] = useState("");
-  const { movies, loadMore, hasMore } = useFetchMovies();
+  const [sort, setSort] = useState("likes");
+  const [order, setOrder] = useState("desc");
+  const [refresh, setRefresh] = useState(0);
+  const { movies, loadMore, hasMore } = useFetchMovies(sort, order, refresh);
 
   const handleInputChange = (e) => {
     setMovieName(e.target.value);
@@ -15,6 +18,8 @@ function Home() {
   const filteredMovies = movies.filter((movie) =>
     movie.title.toLowerCase().includes(movieName.toLowerCase())
   );
+
+  const triggerRefresh = () => setRefresh(r => r + 1);
 
   return (
     <div className="App">
@@ -29,6 +34,27 @@ function Home() {
             placeholder="Entrez le nom du film"
             className="search-input"
           />
+
+          {/* sorting */}
+          <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
+            <label>
+              Trier par :
+              <select value={sort} onChange={(e) => setSort(e.target.value)}>
+                <option value="likes">Likes</option>
+                <option value="title">Titre</option>
+                <option value="year">Année</option>
+              </select>
+            </label>
+
+            <label>
+              Ordre :
+              <select value={order} onChange={(e) => setOrder(e.target.value)}>
+                <option value="desc">Décroissant ↓</option>
+                <option value="asc">Croissant ↑</option>
+              </select>
+            </label>
+          </div>
+
           <p>Nom du film : <strong>{movieName}</strong></p>
         </div>
 
@@ -53,5 +79,3 @@ function Home() {
 }
 
 export default Home;
-
-
