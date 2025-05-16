@@ -5,6 +5,8 @@ import axios from 'axios';
 function CommentForm({ tmdb_id, onCommentAdded }) {
     const [username, setUsername] = useState("");
     const [content, setContent] = useState("");
+    const [rating, setRating] = useState(0);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -14,7 +16,9 @@ function CommentForm({ tmdb_id, onCommentAdded }) {
             tmdb_id: parseInt(tmdb_id),
             username,
             content,
+            rating: parseInt(rating),
         });
+
 
         setUsername("");
         setContent("");
@@ -30,6 +34,12 @@ function CommentForm({ tmdb_id, onCommentAdded }) {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
             />
+            <select value={rating} onChange={(e) => setRating(e.target.value)}>
+                <option value="">Note</option>
+                {[1, 2, 3, 4, 5].map((n) => (
+                    <option key={n} value={n}>{n} ⭐</option>
+                ))}
+            </select>
             <textarea
                 placeholder="Votre commentaire"
                 value={content}
