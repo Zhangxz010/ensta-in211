@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import CommentForm from '../../components/comments/CommentForm';
+import CommentList from '../../components/comments/CommentList';
 
 function MovieDetail() {
     const { id } = useParams();
@@ -37,8 +39,11 @@ function MovieDetail() {
             <p><strong>Résumé :</strong> {movie.overview}</p>
             <p><strong>Durée :</strong> {movie.runtime} minutes</p>
             <p><strong>Langue originale :</strong> {movie.original_language}</p>
+            <CommentList tmdb_id={id} />
+            <CommentForm tmdb_id={id} onCommentAdded={() => window.location.reload()} />
         </div>
     );
+
 }
 
 export default MovieDetail;

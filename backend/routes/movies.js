@@ -24,9 +24,9 @@ router.post('/:id/like', async (req, res) => {
   const id = req.params.id;
 
   try {
-    const movie = await movieRepository.findOneBy({ id });
+    const movie = await movieRepository.findOneBy({ tmdb_id: parseInt(id) });
     if (!movie) {
-      return res.status(404).json({ error: "Film non trouvé" });
+      return res.status(404).json({ error: "Film non trouvé (tmdb_id)" });
     }
 
     movie.likes += 1;
@@ -38,6 +38,7 @@ router.post('/:id/like', async (req, res) => {
     res.status(500).json({ error: "Erreur serveur" });
   }
 });
+
 
 router.get('/', async (req, res) => {
   try {

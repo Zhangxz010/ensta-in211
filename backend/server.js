@@ -8,6 +8,8 @@ import { routeNotFoundJsonHandler } from './services/routeNotFoundJsonHandler.js
 import { jsonErrorHandler } from './services/jsonErrorHandler.js';
 import { appDataSource } from './datasource.js';
 import moviesRouter from './routes/movies.js'; 
+import commentsRouter from './routes/comments.js';
+
 
 const apiRouter = express.Router();
 
@@ -21,6 +23,7 @@ appDataSource
     app.use(cors());
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
+    apiRouter.use('/comments', commentsRouter);
     // Register routes
 
     apiRouter.use('/movies', moviesRouter); 

@@ -1,0 +1,9 @@
+.comment-list {
+    margin-top: 2rem;
+    max-width: 600px;
+}
+
+.comment {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ccc;
+}
