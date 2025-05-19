@@ -1,6 +1,6 @@
 import express from 'express';
 import { appDataSource } from '../datasource.js';
-import Movie from '../entities/movies.js'; 
+import Movie from '../entities/movies.js';
 
 
 const router = express.Router();
@@ -11,7 +11,7 @@ router.post('/new', async (req, res) => {
     const { title, year } = req.body;
 
     const newMovie = movieRepository.create({ title, year });
-    await movieRepository.save(newMovie); 
+    await movieRepository.save(newMovie);
 
     res.status(201).json({ message: 'Film enregistré !' });
   } catch (err) {
@@ -46,7 +46,7 @@ router.get('/', async (req, res) => {
     const order = req.query.order === 'asc' ? 'ASC' : 'DESC';
 
     const page = parseInt(req.query.page || "1");
-    const limit = 20; 
+    const limit = 20;
     const skip = (page - 1) * limit;
 
     const movies = await movieRepository.find({
@@ -68,20 +68,20 @@ router.get('/likes', async (req, res) => {
 });
 
 
-  router.delete('/:id', async (req, res) => {
-    try {
-      const id = req.params.id; 
-      const result = await movieRepository.delete(id);
-  
-      if (result.affected === 0) {
-        return res.status(404).json({ message: `Aucun film trouvé avec l'id=${id}` });
-      }
-  
-      res.status(200).json({ message: `Film avec id=${id} supprimé.` });
-    } catch (err) {
-      console.error('Erreur suppression film:', err);
-      res.status(500).json({ error: 'Erreur serveur' });
+router.delete('/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await movieRepository.delete(id);
+
+    if (result.affected === 0) {
+      return res.status(404).json({ message: `Aucun film trouvé avec l'id=${id}` });
     }
-  });
+
+    res.status(200).json({ message: `Film avec id=${id} supprimé.` });
+  } catch (err) {
+    console.error('Erreur suppression film:', err);
+    res.status(500).json({ error: 'Erreur serveur' });
+  }
+});
 
 export default router;

@@ -10,6 +10,7 @@ const Movie = new typeorm.EntitySchema({
     },
     tmdb_id: {
       type: 'int',
+      nullable: true,
       unique: true,
     },
     title: {
@@ -21,6 +22,7 @@ const Movie = new typeorm.EntitySchema({
     likes: {
       type: 'int',
       default: 0,
+      nullable: true,
     },
   },
 });
