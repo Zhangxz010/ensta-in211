@@ -34,10 +34,10 @@ function Movie({ movie, onLike }) {
     <div style={{ border: "1px solid #ccc", padding: "1rem", width: "200px" }}>
       <Link to={`/movie/${movie.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
         <img src={baseUrl + movie.poster_path} alt={movie.title} width="100%" />
-        <h3>{movie.title}</h3>
+        <h3 className="movie-title">{movie.title}</h3>
       </Link>
-      <p>Date de sortie : {movie.release_date}</p>
-      <p>Likes : {likes}</p>
+      <p className="movie-info">Date de sortie : {movie.release_date}</p>
+      <p className="movie-info">Likes : {likes}</p>
       <button onClick={handleLike} disabled={isLiking}>
         👍 {isLiking ? "Merci..." : "Like"}
       </button>

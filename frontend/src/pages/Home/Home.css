@@ -8,13 +8,13 @@
 }
 
 .search-input {
-  font-size: 1.1rem;
-  padding: 10px 15px;
+  font-size: 1.2rem;
+  padding: 12px 18px;
+  width: 340px;
+  max-width: 85%;
   border-radius: 8px;
   border: none;
   outline: none;
-  width: 300px;
-  max-width: 80%;
   margin-bottom: 10px;
 }
 
@@ -79,12 +79,23 @@
   background-color: #21a1f1;
 }
 
+select {
+  font-size: 1.1rem;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-left: 8px;
+}
+
+label {
+  font-size: 1.1rem;
+}
+
 .movie-title {
-  font-size: clamp(1rem, 2vw, 1.4rem);
-  margin: 0.5rem 0;
+  font-size: clamp(1.2rem, 1.3vw, 1.4rem);
 }
 
 .movie-info {
-  font-size: clamp(0.8rem, 1.5vw, 1rem);
-  color: #ddd;
+  font-size: clamp(0.75rem, 00.80rem, 0.85rem);
+  color: #bbb;
+  margin: 0.2rem 0;
 }
